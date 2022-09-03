@@ -37,12 +37,19 @@ showCategoryNews = (categoryNews) => {
         <div class="card mt-3">
   <div class="row g-0">
     <div class="col-md-4">
-      <img src="${news.image_url}" class="img-fluid rounded-start" alt="...">
+      <img src="${news.image_url}" class="img-fluid rounded-start h-100" alt="...">
     </div>
     <div class="col-md-8">
       <div class="card-body">
         <h5 class="card-title">${news.title}</h5>
         <p class="card-text">${news.details.length > 200 ? news.details.slice(0, 200) + '...' : news.details}</p>
+       <div class="d-flex justify-content-between align-items-center">
+       <div>
+       <img class="rounded-circle" style="width:60px" src="${news.author.img}"><span class="ps-2 fw-bold">${news.author.name ? news.author.name : 'no found author name'}</span>
+       </div>
+       <small class="fw-semibold"><img class="me-2 text-center" src="icion.png">${news.total_view ? news.total_view : "no found veiw"}</small>
+       <button onclick="newsDetails()" class="btn btn-primary"><i class="fa-solid fa-arrow-right"></i></button>
+       </div>
       </div>
     </div>
   </div>
@@ -51,5 +58,7 @@ showCategoryNews = (categoryNews) => {
         newsContainer.appendChild(newsDiv)
     })
 }
+
+
 
 loadCategory()
