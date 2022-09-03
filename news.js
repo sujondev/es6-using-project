@@ -70,16 +70,19 @@ loadNewsDetails = (newsDetail) => {
 
 showNewsDetail = (newsDetail) => {
   const modal = document.getElementById('modal-data')
+  modal.textContent = ''
   newsDetail.forEach(news => {
+    console.log(news)
     const div = document.createElement('div')
     div.classList.add('modal-content')
     div.innerHTML = `
     <div class="modal-header">
-    <h5 class="modal-title" id="newsModalsLabel">Modal title</h5>
+    <h5 class="modal-title" id="newsModalsLabel">${news.title}</h5>
     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
 </div>
 <div class="modal-body">
-    ...
+    <img class="w-100 img-fluid" src="${news.thumbnail_url}">
+    <p class="mt-3">${news.details}</p>
 </div>
 <div class="modal-footer">
     <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
