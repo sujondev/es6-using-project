@@ -40,14 +40,24 @@
     <main>
         <!-- catagroy -->
         <section id="category" class="text-primary">
-
         </section>
         <!-- catagroy -->
         <section>
             <div id="news-container">
-
+            </div>
+            <div id="no-found" class="d-none">
+                <h3 class="mt-5 text-center text-success">No news found</h3>
             </div>
         </section>
+        <!-- spiner adding -->
+        <section id="loader" class="d-none">
+            <div style="height: 400px;" class="d-flex justify-content-center align-items-center">
+                <div class="spinner-border" role="status">
+                    <span class="visually-hidden">Loading...</span>
+                </div>
+            </div>
+        </section>
+        <!-- spiner adding -->
         <section>
             <!-- Modal -->
             <div class="modal fade" id="newsModals" tabindex="-1" aria-labelledby="newsModalsLabel" aria-hidden="true">

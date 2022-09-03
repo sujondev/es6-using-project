@@ -12,13 +12,13 @@ displayCategory = categories => {
     const div = document.createElement('div')
     div.classList.add('d-inline')
     div.innerHTML = `
-       <button class='btn border-0' onclick="categoryData(${categroy.category_id})"> ${categroy.category_name}</button>
-      `
+       <button class='btn border-0' onclick="categoryData(${categroy.category_id})"> ${categroy.category_name}</button>`
     categroyContainer.appendChild(div)
   })
 }
 
 categoryData = (categoryId) => {
+  toggleSpiner(true)
   const url = `https://openapi.programming-hero.com/api/news/category/0${categoryId}`
   fetch(url)
     .then(res => res.json())
@@ -27,6 +27,15 @@ categoryData = (categoryId) => {
 }
 
 showCategoryNews = (categoryNews) => {
+  // no found message show
+  const noFound = document.getElementById('no-found')
+  if (categoryNews.length === 0) {
+    noFound.classList.remove('d-none')
+  }
+  else {
+    noFound.classList.add('d-none')
+  }
+
   const newsContainer = document.getElementById('news-container')
   newsContainer.textContent = ''
   categoryNews.forEach(news => {
@@ -58,7 +67,21 @@ showCategoryNews = (categoryNews) => {
         `;
     newsContainer.appendChild(newsDiv)
   })
+  toggleSpiner(false)
 }
+
+// loader
+const toggleSpiner = isLoader => {
+  const loader = document.getElementById('loader')
+  if (isLoader) {
+    loader.classList.remove('d-none')
+  }
+
+  else {
+    loader.classList.add('d-none')
+  }
+}
+// loader
 
 loadNewsDetails = (newsDetail) => {
   const url = `https://openapi.programming-hero.com/api/news/${newsDetail}`
@@ -83,9 +106,17 @@ showNewsDetail = (newsDetail) => {
 <div class="modal-body">
     <img class="w-100 img-fluid" src="${news.thumbnail_url}">
     <p class="mt-3">${news.details}</p>
+    <div class="d-flex justify-content-between align-items-center">
+    <div>
+    <img class="rounded-circle" style="width:60px" src="${news.author.img}"><span class="ps-2 fw-bold">${news.author.name ? news.author.name : 'no found author name'}</span>
+    </div>
+    <small class="fw-semibold"><img class="me-2 text-center" src="icion.png">${news.total_view ? news.total_view : "no found veiw"}</small>
+    <small class="fw-semibold">Rating: ${news.rating.number}<small>
+    </div>
+    
 </div>
 <div class="modal-footer">
-    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button> 
 </div>
     `;
     modal.appendChild(div)
