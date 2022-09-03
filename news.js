@@ -27,6 +27,11 @@ categoryData = (categoryId) => {
 }
 
 showCategoryNews = (categoryNews) => {
+  console.log(categoryNews)
+  // item found counting 
+  const newsFound = document.getElementById('news-found')
+  newsFound.innerText = categoryNews.length
+  // item found counting 
   // no found message show
   const noFound = document.getElementById('no-found')
   if (categoryNews.length === 0) {
@@ -35,6 +40,7 @@ showCategoryNews = (categoryNews) => {
   else {
     noFound.classList.add('d-none')
   }
+  // no found message show
 
   const newsContainer = document.getElementById('news-container')
   newsContainer.textContent = ''
