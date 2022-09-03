@@ -12,26 +12,36 @@ displayCategory = categories => {
     const div = document.createElement('div')
     div.classList.add('d-inline')
     div.innerHTML = `
-       <button class='btn border-0' onclick="categoryData(${categroy.category_id})">${categroy.category_name}</button>`
+       <button class='btn border-0' onclick="categoryData(${categroy.category_id},'${categroy.category_name}')">${categroy.category_name}</button>`
     categroyContainer.appendChild(div)
   })
 }
 
-categoryData = (categoryId) => {
+categoryData = (categoryId, categoryName) => {
   toggleSpiner(true)
   const url = `https://openapi.programming-hero.com/api/news/category/0${categoryId}`
   fetch(url)
     .then(res => res.json())
-    .then(data => showCategoryNews(data.data))
+    .then(data => showCategoryNews(data.data, categoryName))
     .catch(error => console.log(error))
 }
 
-showCategoryNews = (categoryNews) => {
-  console.log(categoryNews)
+showCategoryNews = (categoryNews, categoryName) => {
   // item found counting 
   const newsFound = document.getElementById('news-found')
   newsFound.innerText = categoryNews.length
   // item found counting 
+  const setCategroyName = document.getElementById('categroy-name')
+  if (categoryName === undefined) {
+    setCategroyName.innerText = 'All News'
+  }
+  else {
+    setCategroyName.innerText = categoryName
+  }
+  // category name set 
+
+  // category name set 
+
   // no found message show
   const noFound = document.getElementById('no-found')
   if (categoryNews.length === 0) {
@@ -73,6 +83,7 @@ showCategoryNews = (categoryNews) => {
         `;
     newsContainer.appendChild(newsDiv)
   })
+  //  loader stop
   toggleSpiner(false)
 }
 
@@ -130,3 +141,4 @@ showNewsDetail = (newsDetail) => {
 }
 
 loadCategory()
+categoryData(8)
