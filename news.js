@@ -27,6 +27,9 @@ categoryData = (categoryId, categoryName) => {
 }
 
 showCategoryNews = (categoryNews, categoryName) => {
+  // sorting
+  categoryNews.sort((a, b) => b.total_view - a.total_view)
+  // sorting
   // item found counting 
   const newsFound = document.getElementById('news-found')
   newsFound.innerText = categoryNews.length
