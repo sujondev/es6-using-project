@@ -12,7 +12,7 @@ displayCategory = categories => {
     const div = document.createElement('div')
     div.classList.add('d-inline')
     div.innerHTML = `
-       <button class='btn border-0' onclick="categoryData(${categroy.category_id})"> ${categroy.category_name}</button>`
+       <button class='btn border-0' onclick="categoryData(${categroy.category_id})">${categroy.category_name}</button>`
     categroyContainer.appendChild(div)
   })
 }
